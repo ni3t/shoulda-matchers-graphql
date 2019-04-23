@@ -6,7 +6,6 @@ RSpec.describe Shoulda::Matchers::Graphql do
   end
 
   context "on a type" do
-    # define_field
     subject { PostType }
     it { should define_field("id").of_type(:id) }
     it { should define_field("text").of_type(:string) }
