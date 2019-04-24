@@ -32,6 +32,11 @@ class Types::Author < GraphQL::Schema::Object
   field :name, String, null: true
 end
 
+class Types::Upvote < GraphQL::Schema::Object
+  field :status, String, null: false
+  field :hot_post, Boolean, null: false
+end
+
 class Types::Post < GraphQL::Schema::Object
   description "Post type"
 
@@ -41,6 +46,10 @@ class Types::Post < GraphQL::Schema::Object
   end
   field :author, Types::Author, null: false
   field :comments, [Types::Comment], null: true
+  field :upvotes, Types::Upvote.connection_type, null: true do
+    argument :status, String, required: true
+    argument :hot_post, Boolean, required: false
+  end
 end
 
 class Types::QueryType < GraphQL::Schema::Object

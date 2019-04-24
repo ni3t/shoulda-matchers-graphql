@@ -29,6 +29,9 @@ RSpec.describe "the whole thing" do
     context "#with_description" do
       it { should define_field("id").with_description("ID") }
     end
+    context "#with_arguments" do
+      it { should define_field("upvotes").with_arguments(status: { required: true }, hot_post: { required: false }) }
+    end
 
     context "combinations" do
       it { should define_field("text").with_description("Text Field").of_type(String).nullable }

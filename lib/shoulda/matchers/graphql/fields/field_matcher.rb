@@ -34,6 +34,10 @@ module Shoulda
           def with_description(field_description)
             WithDescription.new(@field_name, field_description)
           end
+
+          def with_arguments(argument_hash)
+            WithArguments.new(@field_name, argument_hash)
+          end
         end
       end
     end
