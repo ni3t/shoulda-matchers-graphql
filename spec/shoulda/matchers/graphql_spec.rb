@@ -43,4 +43,9 @@ RSpec.describe "the whole thing" do
       it { should define_field("text").with_description("Text Field").of_type(String).optional }
     end
   end
+
+  context "schema" do
+    subject { Schema }
+    it { should define_query_type(Types::QueryType) }
+  end
 end

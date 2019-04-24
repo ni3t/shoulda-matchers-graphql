@@ -43,13 +43,31 @@ class Types::Post < GraphQL::Schema::Object
   field :comments, [Types::Comment], null: true # defined elsewhere
 end
 
+class Types::QueryType < GraphQL::Schema::Object
+  field :post, Types::Post, null: true do
+    argument :id, ID, required: true
+  end
+end
+
 RSpec.describe Types::Post do
-  subject { Types::Post }
-  it { should have_description("This is a Types::Post")}
-  it { should define_field("id").of_type(:ID).required.with_description("ID Description") }
-  it { should define_field("text").of_type(String).required }
-  it { should define_field("author").of_type(Types::Author).required }
-  it { should define_field("comments").of_type([Types::Comment]).optional }
+  context "type and field matchers" do
+    subject { Types::Post }
+    it { should have_description("This is a Types::Post")}
+    it { should define_field("id").of_type(:ID).required.with_description("ID Description") }
+    it { should define_field("text").of_type(String).required }
+    it { should define_field("author").of_type(Types::Author).required }
+    it { should define_field("comments").of_type([Types::Comment]).optional }
+  end
+  context "argument matchers" do
+    subject { Types::QueryType }
+    it { should define_field("post").with_arguments(id: { required: true }) }
+  end
+  context "schema matchers" do
+    subject { Schema }
+    it { should define_query_type(Types::QueryType) }
+    it { should define_mutation_type(Types::MutationType) }
+    it { should define_subscription_type(Types::SubscriptionType) }
+  end
 end
 ```
 

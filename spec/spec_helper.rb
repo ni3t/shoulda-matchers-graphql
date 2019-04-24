@@ -5,6 +5,7 @@ require "graphql"
 RSpec.configure do |c|
   c.include(Shoulda::Matchers::Graphql::Fields)
   c.include(Shoulda::Matchers::Graphql::Types)
+  c.include(Shoulda::Matchers::Graphql::Schema)
 end
 
 # example schema
@@ -70,3 +71,5 @@ end
 class Schema < GraphQL::Schema
   query Types::QueryType
 end
+
+puts Schema.instance_variable_get("@query_object")
