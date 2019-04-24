@@ -1,48 +1,37 @@
-require "graphql"
-
-RSpec.describe Shoulda::Matchers::Graphql do
+RSpec.describe "the whole thing" do
   it "has a version number" do
     expect(Shoulda::Matchers::Graphql::VERSION).not_to be nil
   end
 
   context "on a type" do
-    subject { PostType }
-    it { should define_field("id").of_type(:id) }
-    it { should define_field("text").of_type(:string) }
+    subject { Types::Post }
+
+    context "#define_field" do
+      it { should define_field("id") }
+      it { should_not define_field("not found") }
+    end
+
+    context "#of_type" do
+      it { should define_field("id").of_type(:ID) }
+      it { should define_field("text").of_type(String) }
+      it { should define_field("author").of_type(Types::Author) }
+      it { should define_field("comments").of_type([Types::Comment]) }
+    end
+
+    context "#nullable" do
+      it { should define_field("text").nullable }
+    end
+
+    context "#required" do
+      it { should define_field("id").required }
+    end
+
+    context "#with_description" do
+      it { should define_field("id").with_description("ID") }
+    end
+
+    context "combinations" do
+      it { should define_field("text").with_description("Text Field").of_type(String).nullable }
+    end
   end
-end
-
-# example schema
-
-class Post
-  attr_accessor :id, :text
-
-  def initialize(id:, text:)
-    @id, @text = id, text
-  end
-end
-
-class PostType < GraphQL::Schema::Object
-  description "Post type"
-
-  field :id, ID, null: false
-  field :text, String, null: false
-end
-
-class QueryType < GraphQL::Schema::Object
-  description "Root Query"
-
-  field :post, PostType, null: true do
-    description "get a post by id"
-
-    argument :id, ID, required: true
-  end
-
-  def post(id:)
-    Post.new(id, "test")
-  end
-end
-
-class Schema < GraphQL::Schema
-  query QueryType
 end
