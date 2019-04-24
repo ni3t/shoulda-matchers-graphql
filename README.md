@@ -67,6 +67,7 @@ RSpec.describe Types::Post do
     it { should define_query_type(Types::QueryType) }
     it { should define_mutation_type(Types::MutationType) }
     it { should define_subscription_type(Types::SubscriptionType) }
+    it { should have_max_depth(200) }
   end
 end
 ```

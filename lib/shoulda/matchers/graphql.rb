@@ -5,6 +5,8 @@ require "shoulda/matchers/graphql/schema"
 
 module Shoulda
   module Matchers
+    # This module provides matchers for GraphQL
+
     module Graphql
       class Error < StandardError; end
     end

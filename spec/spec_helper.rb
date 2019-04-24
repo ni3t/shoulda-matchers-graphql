@@ -71,5 +71,3 @@ end
 class Schema < GraphQL::Schema
   query Types::QueryType
 end
-
-puts Schema.instance_variable_get("@query_object")
