@@ -4,6 +4,7 @@ require "graphql"
 
 RSpec.configure do |c|
   c.include(Shoulda::Matchers::Graphql::Fields)
+  c.include(Shoulda::Matchers::Graphql::Types)
 end
 
 # example schema

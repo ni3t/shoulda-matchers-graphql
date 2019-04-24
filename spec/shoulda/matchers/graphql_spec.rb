@@ -3,7 +3,13 @@ RSpec.describe "the whole thing" do
     expect(Shoulda::Matchers::Graphql::VERSION).not_to be nil
   end
 
-  context "on a type" do
+  context "types" do
+    subject { Types::Post }
+    it { should have_description("Post type") }
+    it { should_not have_description("Post type...") }
+  end
+
+  context "fields" do
     subject { Types::Post }
 
     context "#define_field" do

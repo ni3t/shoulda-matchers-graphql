@@ -1,6 +1,10 @@
 # Shoulda::Matchers::Graphql
 
-Shoulda-style matchers for GraphQL.
+Shoulda-style matchers for GraphQL. 
+
+Note: not affiliated with [Thoughtbot's `Shoulda::Matchers`](https://github.com/thoughtbot/shoulda-matchers), but heavily inspired by and grateful for.
+
+Another Note: This library works with or without `Shoulda::Matchers` in a project.
 
 ## Installation
 
@@ -32,6 +36,7 @@ Use the matchers:
 
 ```ruby
 class Types::Post < GraphQL::Schema::Object
+  description "This is a Types::Post"
   field :id, ID, "ID description", null: false
   field :text, String, null: false
   field :author, Types::Author, null: false # defined elsewhere
@@ -40,6 +45,7 @@ end
 
 RSpec.describe Types::Post do
   subject { Types::Post }
+  it { should have_description("This is a Types::Post")}
   it { should define_field("id").of_type(:ID).required.with_description("ID Description") }
   it { should define_field("text").of_type(String).required }
   it { should define_field("author").of_type(Types::Author).required }
@@ -55,7 +61,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/shoulda-matchers-graphql.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ni3t/shoulda-matchers-graphql.
 
 
-to use:
