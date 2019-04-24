@@ -30,7 +30,7 @@ end
 
 Use the matchers:
 
-```
+```ruby
 class Types::Post < GraphQL::Schema::Object
   field :id, ID, "ID description", null: false
   field :text, String, null: false
