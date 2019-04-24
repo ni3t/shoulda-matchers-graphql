@@ -23,8 +23,8 @@ module Shoulda
             OfType.new(@field_name, type_name)
           end
 
-          def nullable
-            Nullable.new(@field_name)
+          def optional
+            Optional.new(@field_name)
           end
 
           def required

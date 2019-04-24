@@ -2,7 +2,7 @@ module Shoulda
   module Matchers
     module Graphql
       module Fields
-        class Nullable < FieldMatcher
+        class Optional < FieldMatcher
           def initialize(field_name)
             super
           end
@@ -16,7 +16,7 @@ module Shoulda
           end
 
           def description
-            super + ", nullable"
+            super + ", optional"
           end
         end
       end

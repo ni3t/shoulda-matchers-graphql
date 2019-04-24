@@ -18,8 +18,8 @@ RSpec.describe "the whole thing" do
       it { should define_field("comments").of_type([Types::Comment]) }
     end
 
-    context "#nullable" do
-      it { should define_field("text").nullable }
+    context "#optional" do
+      it { should define_field("text").optional }
     end
 
     context "#required" do
@@ -34,7 +34,7 @@ RSpec.describe "the whole thing" do
     end
 
     context "combinations" do
-      it { should define_field("text").with_description("Text Field").of_type(String).nullable }
+      it { should define_field("text").with_description("Text Field").of_type(String).optional }
     end
   end
 end

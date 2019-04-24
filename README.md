@@ -1,8 +1,6 @@
 # Shoulda::Matchers::Graphql
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/shoulda/matchers/graphql`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Shoulda-style matchers for GraphQL.
 
 ## Installation
 
@@ -22,7 +20,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Configure RSpec:
+
+```ruby
+RSpec.configure do |config|
+  config.include(Shoulda::Matchers::Graphql)
+end
+```
+
+Use the matchers:
+
+```
+class Types::Post < GraphQL::Schema::Object
+  field :id, ID, "ID description", null: false
+  field :text, String, null: false
+  field :author, Types::Author, null: false # defined elsewhere
+  field :comments, [Types::Comment], null: true # defined elsewhere
+end
+
+RSpec.describe Types::Post do
+  subject { Types::Post }
+  it { should define_field("id").of_type(:ID).required.with_description("ID Description") }
+  it { should define_field("text").of_type(String).required }
+  it { should define_field("author").of_type(Types::Author).required }
+  it { should define_field("comments").of_type([Types::Comment]).optional }
+end
+```
 
 ## Development
 
@@ -36,9 +59,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 
 to use:
-
-```ruby
-RSpec.configure do |config|
-  config.include(Shoulda::Matchers::Graphql)
-end
-```

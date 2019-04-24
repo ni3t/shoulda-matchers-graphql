@@ -1,7 +1,7 @@
 require_relative "fields/field_matcher"
 require_relative "fields/define_field"
 require_relative "fields/of_type"
-require_relative "fields/nullable"
+require_relative "fields/optional"
 require_relative "fields/required"
 require_relative "fields/with_arguments"
 require_relative "fields/with_description"
